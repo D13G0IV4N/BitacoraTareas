@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->string('name')->unique()->comment('Ej: Baja, Media, Alta');
             $table->integer('level')->comment('Orden interno (1,2,3…)');
             $table->string('color', 7)->comment('Hex para UI, p.ej. #FF5722');
+            $table->softDeletes(); // Para borrado lógico
             $table->timestamps();
         });
     }

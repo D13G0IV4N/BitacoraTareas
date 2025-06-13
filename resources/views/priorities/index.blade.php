@@ -8,7 +8,12 @@
 
 @section('content')
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     @endif
 
     <a href="{{ route('priorities.create') }}" class="btn btn-primary mb-3">Nueva Prioridad</a>
