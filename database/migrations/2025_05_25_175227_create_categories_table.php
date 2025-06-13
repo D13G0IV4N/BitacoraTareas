@@ -15,6 +15,7 @@ return new class extends Migration {
                   ->constrained('users')
                   ->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes(); //  Esto es para el borrado lógico
         });
     }
 

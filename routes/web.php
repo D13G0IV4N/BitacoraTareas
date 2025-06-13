@@ -21,5 +21,6 @@ Route::middleware(['auth'])->group(function () {
     
     // CRUD de categorías
     Route::resource('categories', CategoryController::class);
+    
 });
 
