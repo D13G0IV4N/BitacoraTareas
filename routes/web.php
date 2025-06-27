@@ -16,17 +16,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Rutas protegidas por autenticación
 Route::middleware(['auth'])->group(function () {
-    // CRUD de prioridades
-    Route::resource('priorities', PriorityController::class);
+// CRUD de prioridades
+Route::resource('priorities', PriorityController::class);
     
-    // CRUD de categorías
-    Route::resource('categories', CategoryController::class);
+// CRUD de categorías
+Route::resource('categories', CategoryController::class);
     
-  //Ruta para generar pdf de categorias
+//Ruta para generar pdf de categorias
 Route::get('/categories-pdf', [CategoryController::class, 'pdf'])->name('categories.all.pdf');
 
-  // Ruta apra generar pdf en prioridades
+// Ruta apra generar pdf en prioridades
 Route::get('/priorities-pdf', [PriorityController::class, 'pdf'])->name('priorities.pdf');
+
+
 
 
 });
