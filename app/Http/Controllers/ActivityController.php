@@ -3,63 +3,77 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Category;
+use App\Models\Priority;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ActivityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $activities = Activity::with(['priority', 'category', 'assignee'])->orderBy('due_at')->get();
+        return view('activities.index', compact('activities'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $categories = Category::orderBy('name')->get();
+        $priorities = Priority::orderBy('level')->get();
+        $users = User::orderBy('name')->get();
+
+        return view('activities.create', compact('categories', 'priorities', 'users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title'       => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'start_at'    => 'required|date',
+            'due_at'      => 'required|date|after_or_equal:start_at',
+            'priority_id' => 'required|exists:priorities,id',
+            'category_id' => 'required|exists:categories,id',
+            'assigned_to' => 'nullable|exists:users,id',
+        ]);
+
+        $validated['created_by'] = Auth::id();
+
+        Activity::create($validated);
+
+        return redirect()->route('activities.index')->with('success', 'Actividad creada correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Activity $activity)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Activity $activity)
     {
-        //
+        $categories = Category::orderBy('name')->get();
+        $priorities = Priority::orderBy('level')->get();
+        $users = User::orderBy('name')->get();
+
+        return view('activities.edit', compact('activity', 'categories', 'priorities', 'users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Activity $activity)
     {
-        //
+        $validated = $request->validate([
+            'title'       => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'start_at'    => 'required|date',
+            'due_at'      => 'required|date|after_or_equal:start_at',
+            'priority_id' => 'required|exists:priorities,id',
+            'category_id' => 'required|exists:categories,id',
+            'assigned_to' => 'nullable|exists:users,id',
+        ]);
+
+        $activity->update($validated);
+
+        return redirect()->route('activities.index')->with('success', 'Actividad actualizada correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Activity $activity)
     {
-        //
+        $activity->delete();
+        return redirect()->route('activities.index')->with('success', 'Actividad eliminada correctamente');
     }
 }

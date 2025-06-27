@@ -1,4 +1,3 @@
-{{-- resources/views/home.blade.php --}}
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
@@ -37,6 +36,22 @@
                 </div>
                 <a href="{{ route('priorities.index') }}" class="small-box-footer">
                     Ver Prioridades <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        {{-- Caja para Actividades --}}
+        <div class="col-lg-6 col-12">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>Actividades</h3>
+                    <p>Gestiona tus actividades registradas</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <a href="{{ route('activities.index') }}" class="small-box-footer">
+                    Ver Actividades <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>

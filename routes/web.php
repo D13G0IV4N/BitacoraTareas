@@ -21,6 +21,11 @@ Route::resource('priorities', PriorityController::class);
     
 // CRUD de categorías
 Route::resource('categories', CategoryController::class);
+
+// CRUD de Actividades
+Route::resource('activities', App\Http\Controllers\ActivityController::class)->middleware(['auth']);
+//Route::resource('activities', ActivityController::class)->middleware(['auth']);
+
     
 //Ruta para generar pdf de categorias
 Route::get('/categories-pdf', [CategoryController::class, 'pdf'])->name('categories.all.pdf');
