@@ -71,5 +71,22 @@
                 </a>
             </div>
         </div>
+
+        {{-- Caja para Usuarios --}}
+<div class="col-lg-6 col-12">
+    <div class="small-box bg-danger">
+        <div class="inner">
+            <h3>Usuarios</h3>
+            <p>Administra los usuarios del sistema</p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-users"></i>
+        </div>
+        <a href="{{ route('users.index') }}" class="small-box-footer">
+            Ver Usuarios <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
+
     </div>
 @stop

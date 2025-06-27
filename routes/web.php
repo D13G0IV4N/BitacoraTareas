@@ -4,7 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 
+
+
+//Ruta de inicio y de Landing page
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,6 +31,9 @@ Route::resource('activities', App\Http\Controllers\ActivityController::class)->m
 
 // CRUD de Comentarios
 Route::resource('comments', CommentController::class);
+
+// CRUD de Usuarios
+Route::resource('users', UserController::class);
     
 //Ruta para generar pdf de categorias
 Route::get('/categories-pdf', [CategoryController::class, 'pdf'])->name('categories.all.pdf');
