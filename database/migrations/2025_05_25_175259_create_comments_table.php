@@ -22,6 +22,8 @@ return new class extends Migration {
             $table->timestamp('edited_at')
                   ->nullable()
                   ->comment('Fecha de última edición');
+            $table->timestamps(); // agregado para created_at y updated_at
+            $table->softDeletes(); // borrado lógico
         });
     }
 

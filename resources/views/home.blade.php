@@ -55,5 +55,21 @@
                 </a>
             </div>
         </div>
+
+        {{-- Caja para Comentarios --}}
+        <div class="col-lg-6 col-12">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>Comentarios</h3>
+                    <p>Gestiona los comentarios en actividades</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <a href="{{ route('comments.index') }}" class="small-box-footer">
+                    Ver Comentarios <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
     </div>
 @stop

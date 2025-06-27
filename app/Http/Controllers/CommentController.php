@@ -3,63 +3,74 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // Traer solo comentarios no eliminados con relaciones para mostrar
+        $comments = Comment::with(['activity', 'user'])
+                    ->whereNull('deleted_at')
+                    ->orderBy('commented_at', 'desc')
+                    ->get();
+
+        return view('comments.index', compact('comments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        // Para crear un comentario hay que seleccionar actividad y usuario (o usar el auth)
+        $activities = Activity::all();
+        $users = \App\Models\User::all();
+
+        return view('comments.create', compact('activities', 'users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'activity_id' => 'required|exists:activities,id',
+            'user_id'     => 'required|exists:users,id',
+            'comment'     => 'required|string',
+        ]);
+
+        $validated['commented_at'] = now();
+
+        Comment::create($validated);
+
+        return redirect()->route('comments.index')->with('success', 'Comentario creado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Comment $comment)
     {
-        //
+        $activities = Activity::all();
+        $users = \App\Models\User::all();
+
+        return view('comments.edit', compact('comment', 'activities', 'users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $validated = $request->validate([
+            'activity_id' => 'required|exists:activities,id',
+            'user_id'     => 'required|exists:users,id',
+            'comment'     => 'required|string',
+        ]);
+
+        $validated['edited_at'] = now();
+
+        $comment->update($validated);
+
+        return redirect()->route('comments.index')->with('success', 'Comentario actualizado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete(); // borrado lógico
+
+        return redirect()->route('comments.index')->with('success', 'Comentario eliminado correctamente');
     }
 }

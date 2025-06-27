@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\CommentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,8 +24,9 @@ Route::resource('categories', CategoryController::class);
 
 // CRUD de Actividades
 Route::resource('activities', App\Http\Controllers\ActivityController::class)->middleware(['auth']);
-//Route::resource('activities', ActivityController::class)->middleware(['auth']);
 
+// CRUD de Comentarios
+Route::resource('comments', CommentController::class);
     
 //Ruta para generar pdf de categorias
 Route::get('/categories-pdf', [CategoryController::class, 'pdf'])->name('categories.all.pdf');
