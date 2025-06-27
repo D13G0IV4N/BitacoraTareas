@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Auth;
 class ActivityController extends Controller
 {
     public function index()
-    {
-        $activities = Activity::with(['priority', 'category', 'assignee'])->orderBy('due_at')->get();
-        return view('activities.index', compact('activities'));
-    }
+{
+    // Solo mostramos actividades que no han sido eliminadas
+    $activities = Activity::whereNull('deleted_at')->orderBy('due_at')->get();
+    return view('activities.index', compact('activities'));
+}
 
     public function create()
     {
@@ -72,8 +73,13 @@ class ActivityController extends Controller
     }
 
     public function destroy(Activity $activity)
-    {
-        $activity->delete();
-        return redirect()->route('activities.index')->with('success', 'Actividad eliminada correctamente');
-    }
+{
+    // Soft delete
+    $activity->delete();
+
+    return redirect()
+        ->route('activities.index')
+        ->with('success', 'Actividad eliminada correctamente');
+}
+    
 }

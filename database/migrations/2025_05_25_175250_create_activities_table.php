@@ -8,6 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('activities', function (Blueprint $table) {
+            
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
@@ -27,6 +28,7 @@ return new class extends Migration {
                   ->constrained('users')
                   ->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes(); //Para lo del borrado logico
         });
     }
 

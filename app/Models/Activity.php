@@ -9,9 +9,14 @@ use App\Models\Priority;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Comment;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Activity extends Model
-{
+{   
+   use SoftDeletes;
+        protected $dates = ['deleted_at'];
+
     protected $fillable = [
         'title',
         'description',
