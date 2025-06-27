@@ -36,8 +36,6 @@
     </style>
 </head>
 <body>
-
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
@@ -45,7 +43,7 @@
             @if (Route::has('login'))
                 <div class="ms-auto">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="btn btn-outline-primary me-2">Dashboard</a>
+                        <a href="{{ url('/home') }}" class="btn btn-outline-primary me-2">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-primary me-2">Iniciar sesión</a>
                         @if (Route::has('register'))
