@@ -8,6 +8,7 @@
 
 @section('content')
     <div class="row">
+
         {{-- Caja para Categorías --}}
         <div class="col-lg-6 col-12">
             <div class="small-box bg-info">
@@ -73,20 +74,36 @@
         </div>
 
         {{-- Caja para Usuarios --}}
-<div class="col-lg-6 col-12">
-    <div class="small-box bg-danger">
-        <div class="inner">
-            <h3>Usuarios</h3>
-            <p>Administra los usuarios del sistema</p>
+        <div class="col-lg-6 col-12">
+            <div class="small-box bg-dark">
+                <div class="inner">
+                    <h3>Usuarios</h3>
+                    <p>Administra los usuarios del sistema</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <a href="{{ route('users.index') }}" class="small-box-footer">
+                    Ver Usuarios <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
         </div>
-        <div class="icon">
-            <i class="fas fa-users"></i>
+
+        {{-- Caja para Assets --}}
+        <div class="col-lg-6 col-12">
+            <div class="small-box bg-primary">
+                <div class="inner">
+                    <h3>Assets</h3>
+                    <p>Gestiona imágenes y videos</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-photo-video"></i>
+                </div>
+                <a href="{{ route('assets.index') }}" class="small-box-footer">
+                    Ver Assets <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
         </div>
-        <a href="{{ route('users.index') }}" class="small-box-footer">
-            Ver Usuarios <i class="fas fa-arrow-circle-right"></i>
-        </a>
-    </div>
-</div>
 
     </div>
 @stop

@@ -36,7 +36,22 @@ return [
             'serve' => true,
             'throw' => false,
             'report' => false,
+            
         ],
+            'images' => [
+                'driver'     => 'local',
+                'root'       => storage_path('app/public/images'),
+                'url'        => env('APP_URL') . '/storage/images',
+                'visibility' => 'public',
+            ],
+
+        'videos' => [
+                'driver'     => 'local',
+                'root'       => storage_path('app/public/videos'),
+                'url'        => env('APP_URL') . '/storage/videos',
+                'visibility' => 'public',
+        ],
+
 
         'public' => [
             'driver' => 'local',

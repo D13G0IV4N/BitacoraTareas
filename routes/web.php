@@ -5,7 +5,7 @@ use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\AssetsController;
 
 
 //Ruta de inicio y de Landing page
@@ -34,6 +34,20 @@ Route::resource('comments', CommentController::class);
 
 // CRUD de Usuarios
 Route::resource('users', UserController::class);
+
+
+//Rutas para lo de guardar imagenes y videos 
+Route::resource('assets', AssetsController::class)
+     ->only(['index','create','store']);
+
+Route::get('assets/images/{file}', [AssetsController::class, 'getImage'])
+     ->name('assets.image');
+
+Route::get('assets/videos/{file}', [AssetsController::class, 'getVideo'])
+     ->name('assets.video');
+
+
+
     
 //Ruta para generar pdf de categorias
 Route::get('/categories-pdf', [CategoryController::class, 'pdf'])->name('categories.all.pdf');
